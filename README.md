@@ -1,1 +1,1 @@
-Bachelor's thesis. See more in "Thesis.pdf"
+Bachelor's thesis. See more in "Thesis.pdf" and "Presentazione.pdf"
