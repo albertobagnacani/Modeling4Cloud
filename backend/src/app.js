@@ -40,10 +40,10 @@ router.route('/upload').post(upload.single('data'), function (req, res) {
         if (err) return res.status(500).send("Problem in POST\n");
         res.status(200).send("File registered\n");
 
-        const { exec } = require('child_process'); // TODO secrets?
+        const { exec } = require('child_process');
         exec('tail -n +2 '+ UPLOAD_PATH+req.file.originalname +' | mongoimport '+process.env.DBIMPORT+' --columnsHaveTypes --fields "provider.string\(\),from_zone.string\(\),to_zone.string\(\),from_host.string\(\),to_host.string\(\),icmp_seq.int32\(\),ttl.int32\(\),time.double\(\),timestamp.date\(2006-01-02T15:04:05-00:00\)"', (err, stdout, stderr) => {
             if (err) {
-                // TODO
+                // Handle error
                 console.log(err)
                 return;
             }
@@ -52,6 +52,7 @@ router.route('/upload').post(upload.single('data'), function (req, res) {
 });
 
 // TODO
+// warnings;
 // check better params;
 // export code in a different file and refactor/improve it?;
 // should unify threshold and range?
@@ -97,7 +98,7 @@ router.route('/pings/query/avgOfEveryPingOfSelectedDate').get(async (req, res, n
         .group({_id : "$provider", avg: {$avg: "$time"}})
         .exec(function (err, resp) {
             if (err) {
-                // TODO
+                // Handle error
                 console.log(err);
             } else {
                 res.json(resp);
@@ -105,7 +106,7 @@ router.route('/pings/query/avgOfEveryPingOfSelectedDate').get(async (req, res, n
         })
 });
 
-router.route('/pings/query/avgOfEveryDayOfSelectedYear').get(async (req, res, next) => { // TODO name of query -> Change "everything" in front-end
+router.route('/pings/query/avgOfEveryDayOfSelectedYear').get(async (req, res, next) => {
     req.setTimeout(0);
     var myMonth, myProvider, mySameRegion;
 
@@ -116,13 +117,13 @@ router.route('/pings/query/avgOfEveryDayOfSelectedYear').get(async (req, res, ne
     Ping.aggregate()
         .allowDiskUse(true)
         .match({provider: myProvider})
-        .project({month: {$month: "$timestamp"}, sameRegion: {$cmp: ['$from_zone', '$to_zone']}, timestamp: "$timestamp", time: "$time"}) // TODO better timestamp: 1, time:1?
+        .project({month: {$month: "$timestamp"}, sameRegion: {$cmp: ['$from_zone', '$to_zone']}, timestamp: "$timestamp", time: "$time"})
         .match({$and: [{month: myMonth}, {sameRegion: mySameRegion}]})
         .group({_id : {"$dayOfYear": "$timestamp"}, avg: {$avg: "$time"}})
         .sort({_id: 1})
         .exec(function (err, resp) {
             if (err) {
-                // TODO
+                // Handle error
                 console.log(err);
             } else {
                 res.json(resp);
@@ -235,7 +236,7 @@ router.route('/pings/query/range').get(async (req, res, next) => {
     }
 });
 
-router.route('/pings/query/zone').get(async (req, res, next) => { // TODO not working
+router.route('/pings/query/zone').get(async (req, res, next) => { // TODO
     try{
         var query = {}, sortQuery = {};
 

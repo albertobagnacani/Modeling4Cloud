@@ -15,7 +15,7 @@ const spec = {
 export default class MyGraph extends React.Component {
     render() {
         // TODO if no data
-        return ( // TODO
+        return (
             <div>
                 {(this.props.graphType == 'Pie') ? <Pie data={this.props.data} width={spec.width} height={spec.height} options={spec.options} redraw/> : null }
                 {(this.props.graphType == 'Doughnut') ? <Doughnut data={this.props.data} width={spec.width} height={spec.height} options={spec.options}  redraw/> : null }

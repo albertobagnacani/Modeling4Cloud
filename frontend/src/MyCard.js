@@ -164,8 +164,8 @@ export default class MyCard extends React.Component {
 
     // TODO insert date instead of numbers in x axis
 
-    async callApi(){ // TODO
-        // TODO ip hard-coded
+    async callApi(){
+
         var query = (this.state.queryNumber == 1)
             ? process.env.Q1+moment(this.state.start).format('YYYY-MM-DD')+'&end='+moment(this.state.end).format('YYYY-MM-DD')+'&sameRegion='+((this.state.sameRegion === true) ? 0 : 1)
             : process.env.Q2+this.state.year+'&sameRegion='+((this.state.sameRegion === true) ? 0 : 1)+'&provider='+this.state.provider;
