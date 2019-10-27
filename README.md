@@ -1,6 +1,8 @@
 # Modeling4Cloud
 Bachelor degree thesis. Full stack application (MongoDB, Express.js, React.js, Node.js) for monitoring, analysis and representation of network delays of the main Cloud Providers.
 ## Abstract
+Abstract link: https://ieeexplore.ieee.org/document/8187641
+
 For many applications with inter-datacenter cloud deployments it is important to rely on an accurate model of delay times across different geolocations. Unfortunately, such a model is currently not available to researchers and practitioners.
  
 From the perspective of practitioners and researchers, a key challenge and still open issue is how to realistically model inter-datacenter communication delays. In fact, latency between datacenters is subject to several (uncontrollable) factors, including its intrinsic higher variability - compared to intra-datacenter communications - and periodic readjustments/idiosyncrasies, such as variations of the data path due to network load balancing techniques. 
